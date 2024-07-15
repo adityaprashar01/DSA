@@ -11,6 +11,7 @@ Explanation: 6 is the pivot integer since: 1 + 2 + 3 + 4 + 5 + 6 = 6 + 7 + 8 = 2
 
 
 //Find the Pivot Integer
+import java.util.*;
 class pivot {
         public int pivotInteger(int n) {
             int sum = (n*(n+1))/2;

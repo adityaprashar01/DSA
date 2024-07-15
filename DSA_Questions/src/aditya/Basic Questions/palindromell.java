@@ -2,6 +2,7 @@
 //Given the head of a singly linked list, return true if it is a
 //palindrome
 // or false otherwise.
+import java.util.*;
 class palindromell {
     public boolean isPalindrome(ListNode head) {
         if(head == null || head.next==null){
