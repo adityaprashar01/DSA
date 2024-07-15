@@ -1,6 +1,6 @@
 package aditya.Trees;
 import java.util.*;
-public class BottomViewOfBinaryTree {
+public class Top_View_of_Binary_Tree {
 
     // class to create a node
     public static class Node {
@@ -13,6 +13,7 @@ public class BottomViewOfBinaryTree {
             left = right = null;
         }
     }
+
     // class of binary tree
     public static class BinaryTree {
         Node root;
@@ -21,11 +22,11 @@ public class BottomViewOfBinaryTree {
 
         // function should print the topView of
         // the binary tree
-        void BottomView(Node root)
+        void TopView(Node root)
         {
             class QueueObj {
                 Node node;
-                int hd;//hd is horizontal distance, -1, 0, 1, 2 etc from the previous root
+                int hd;
 
                 QueueObj(Node node, int hd)
                 {
@@ -34,7 +35,7 @@ public class BottomViewOfBinaryTree {
                 }
             }
             Queue<QueueObj> q = new LinkedList<QueueObj>();
-            Map<Integer, Node> bottomViewMap
+            Map<Integer, Node> topViewMap
                     = new TreeMap<Integer, Node>();
 
             if (root == null) {
@@ -44,18 +45,16 @@ public class BottomViewOfBinaryTree {
                 q.add(new QueueObj(root, 0));
             }
             System.out.println(
-                    "The bottom view of the tree is : ");
+                    "The top view of the tree is : ");
 
             // count function returns 1 if the container
             // contains an element whose key is equivalent
             // to hd, or returns zero otherwise.
             while (!q.isEmpty()) {
-                QueueObj tmpNode = q.poll();//dequeue that element from queue.
-
-                bottomViewMap.put(tmpNode.hd, tmpNode.node);//add that dequeued element in Map.
-                                                            //with horizontal distance and node itself.
-                                                            //this doesn't check if the same hd is previously noted as in case of top view.
-                                                            //it updates the new node with same hd. at last we get bottom view.
+                QueueObj tmpNode = q.poll();
+                if (!topViewMap.containsKey(tmpNode.hd)) {
+                    topViewMap.put(tmpNode.hd, tmpNode.node);
+                }
                 if (tmpNode.node.left != null) {
                     q.add(new QueueObj(tmpNode.node.left,
                             tmpNode.hd - 1));
@@ -66,10 +65,9 @@ public class BottomViewOfBinaryTree {
                 }
             }
             for (Map.Entry<Integer, Node> entry :
-                    bottomViewMap.entrySet()) {
+                    topViewMap.entrySet()) {
                 System.out.print(entry.getValue().data + " ");
             }
         }
     }
 }
-
